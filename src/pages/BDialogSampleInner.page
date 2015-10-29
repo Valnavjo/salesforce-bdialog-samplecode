@@ -1,0 +1,49 @@
+<apex:page showHeader="false" sidebar="false">
+
+<head>
+    <apex:includeScript value="{!URLFOR($Resource.jQuery, '/jquery-1.8.2.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jQuery, '/postmessage/jquery.ba-postmessage.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.bDialogJs)}"/>
+
+    <script type="text/javascript">
+        var j$ = jQuery.noConflict();
+        
+        var parent_domain = '{!JSENCODE($CurrentPage.parameters.parent_domain)}';
+        var dialog_id = '{!JSENCODE($CurrentPage.parameters.dialog_id)}';
+        
+        j$(document).ready(function() {
+            j$('input[id$=btnCloseDialog]').click(function(event) {
+                event.preventDefault();
+                BIGIANT_DIALOG.closeDialog(dialog_id, parent_domain, parent);
+            });
+            
+            j$('input[id$=btnCloseRefreshDialog]').click(function(event) {
+                event.preventDefault();
+                BIGIANT_DIALOG.closeDialogAndRefresh(dialog_id, parent_domain, parent);
+            });
+            
+            j$('input[id$=btnLogicCloseRedirectDialog]').click(function(event) {
+                event.preventDefault();
+                BIGIANT_DIALOG.closeDialogAndRedirect(dialog_id, parent_domain, parent, 'http://www.valnavjo.com');
+            });
+        });
+
+	</script>
+	
+</head>
+
+<apex:form >
+
+    <apex:pageBlock >
+    
+        <apex:pageBlockButtons >
+            <apex:commandButton id="btnCloseDialog" value="Close dialog" />
+            <apex:commandButton id="btnCloseRefreshDialog" value="Close dialog and refresh" />
+            <apex:commandButton id="btnLogicCloseRedirectDialog" value="Close dialog and redirect" />
+        </apex:pageBlockButtons>
+    
+    </apex:pageBlock>
+
+</apex:form>
+
+</apex:page>

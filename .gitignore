@@ -1,0 +1,7 @@
+config/
+mm.log
+*.sublime-project
+*.sublime-settings
+*.sublime-workspace
+apex-scripts/log
+debug/logs
